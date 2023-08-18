@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="point_of_sale.assets" xml:space="preserve">
+    <t t-extend="ProductInfoPopup">
+        <t t-jquery=".extra .section-variants" t-operation="after">
+            <t t-call="module_name.product_info_popup_extension"/>
+        </t>
+    </t>
+</templates>
