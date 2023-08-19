@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
         <template id="custom_product_info_popup_template" inherit_id="point_of_sale.ProductInfoPopup" name="Custom Product Info Popup" owl="1">

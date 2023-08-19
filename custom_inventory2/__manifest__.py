@@ -11,8 +11,10 @@
     'data': [
         'security/ir.model.access.csv',
         'views/product_Items_views.xml',
-        'views/product_info_popup_template.xml',
     ],
+     'web.assets_qweb': [
+        'custom_inventory/static/src/xml/agregar_stock_modal.xml' 
+     ],
     'installable': True,
     'application': True,
 }
