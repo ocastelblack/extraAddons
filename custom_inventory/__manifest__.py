@@ -11,8 +11,12 @@
     'data': [
         'security/ir.model.access.csv',
         'views/product_Items_views.xml',
-        'views/product_info_popup_template.xml',
     ],
     'installable': True,
     'application': True,
+    'assets': {
+      "point_of_sale.assets":[
+          "custom_inventory/static/src/xml/extended_product_info_popup.xml"
+      ],  
+    },
 }
