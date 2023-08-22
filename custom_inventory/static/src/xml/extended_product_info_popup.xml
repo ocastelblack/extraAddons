@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<templates id="template" xml:space="preserve">
+<!-- <templates id="template" xml:space="preserve">
     <t t-name="ProductInfoPopup" t-inherit="point_of_sale.ProductInfoPopup" 
     t-inherit-mode="extension" owl="1">
         <xpath expr="//div[@class='section-product-info-title']" position="after">
@@ -9,16 +9,37 @@
             </div>
         </xpath>
     </t>
+</templates> -->
+
+<!-- <templates id="template" xml:space="preserve">
+    <t t-name="ProductInfoPopup" t-inherit="point_of_sale.ProductInfoPopup" 
+    t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[@class='section-inventory-body']" position="after">
+            <div class="section-my-custom">
+                <p>This is my custom content.</p>
+                <span t-esc="productInfo.stock_miami"></span>
+            </div>
+        </xpath>
+    </t>
+</templates> -->
+
+<templates id="template" xml:space="preserve">
+    <t t-name="ProductInfoPopup" t-inherit="point_of_sale.ProductInfoPopup" 
+    t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[@class='section-inventory-body']" position="inside">
+            <tr class="custom-inventory-row">
+                <td>Stock Miami:   </td>
+                <td><t t-esc="productInfo.stock_miami"/></td>
+            </tr>
+        </xpath>
+    </t>
 </templates>
 
-<!-- <odoo>
-    <data>
-        <template id="custom_product_info_popup_template" inherit_id="point_of_sale.ProductInfoPopup" name="Custom Product Info Popup" owl="1">
-            <xpath expr="//div[@class='section-inventory']" position="after">
-                <div class="custom-div">
-                    This is my custom div content.
-                </div>
-            </xpath>
-        </template>
-    </data>
-</odoo> -->
+<!-- <template id="inherit_product_info_popup" inherit_id="point_of_sale.ProductInfoPopup" name="Custom Product Info Popup">
+    <xpath expr="//div[@class='section-inventory-body']/table[@class='mobile-table']" position="inside">
+        <tr class="custom-inventory-row">
+            <td>Stock Miami:</td>
+            <td><t t-esc="product.Stock_Miami"/></td>
+        </tr>
+    </xpath>
+</template> -->
