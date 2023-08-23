@@ -26,10 +26,10 @@
 <templates id="template" xml:space="preserve">
     <t t-name="ProductInfoPopup" t-inherit="point_of_sale.ProductInfoPopup" 
     t-inherit-mode="extension" owl="1">
-        <xpath expr="//div[@class='section-inventory-body']" position="inside">
+        <xpath expr="//div[@class='section-inventory-body']/table[@class='mobile-table']" position="inside">
             <tr class="custom-inventory-row">
-                <td>Stock Miami:   </td>
-                <td><t t-esc="productInfo.stock_miami"/></td>
+                <td>Stock Miami:</td>
+                <td><t t-esc="productInfo.stock_miami"/> Units</td>
             </tr>
         </xpath>
     </t>

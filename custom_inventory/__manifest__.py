@@ -5,7 +5,7 @@
     'description': """
         Este modulo agrega un campo personalizado "items" a la vista de l plantilla producto.
     """,
-    'author': 'Oscar Castelblanco',
+    'author': 'Oscar Castelblanco,Sakya Tech',
     'category': 'Inventory',
     'depends': ['base', 'product','stock','point_of_sale'],
     'data': [
