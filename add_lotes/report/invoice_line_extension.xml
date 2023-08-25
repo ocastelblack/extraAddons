@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="report_invoice_document_inherited" inherit_id="account.report_invoice_document">
+            <xpath expr="//th[@name='th_quantity']" position="after">
+                <th name="th_lot_name" class="text-start"><span>SN/LN</span></th>
+                <th name="th_expiration_date" class="text-start"><span>Expiration Date</span></th>
+            </xpath>
+            <xpath expr="//table[@name='invoice_line_table']/tbody/t[3]/tr/t[1]//td[2]" position="after">
+                <th><span t-esc="o.funcion(line.product_id)"></span></th>
+                <th></th>
+            </xpath>
+        </template>
+        <template id="report_replace_stock" inherit_id="stock_account.stock_account_report_invoice_document">
+            <xpath expr="//table[@name='invoice_snln_table']" position="replace"/>
+        </template>
+    </data>
+</odoo>
