@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="my_custom_div_informations" inherit_id="sale.sale_order_portal_content">
+            <xpath expr="//td[@id='product_name']" position="replace">
+                <td id="product_name">
+                    <span t-field="line.name"/>
+                    <!-- <span t-esc="sale_order.funcion_lots_sales_order(line.product_id)"/> -->
+                    <t t-set="stock_info" t-value="sale_order.get_lots_sales_order(sale_order.name, str(line.product_id).split(',')[0])"/>
+                    <t t-if="stock_info">
+                        <t t-set="first_lot" t-value="stock_info[0]" />
+                        <t t-if="first_lot.get('lot_name')">
+                            <br/><span t-esc="first_lot['lot_name']"/>
+                        </t>
+                        <t t-if="first_lot.get('expiration_date')">
+                            <span t-esc="first_lot['expiration_date'].strftime('%d/%m/%Y')"/>
+                        </t>
+                    </t>
+                </td>
+            </xpath>
+        </template>
+    </data>
+</odoo>

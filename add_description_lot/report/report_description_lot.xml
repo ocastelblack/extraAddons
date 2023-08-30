@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <template id="report_invoice_document_inherited" inherit_id="account.report_invoice_document">
+            <xpath expr="//td[@name='account_invoice_line_name']" position="replace">
+                <td name="account_invoice_line_name">
+                    <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                    <t t-set="stock_info" t-value="o.get_stock_info(o.invoice_origin, str(line.product_id).split(',')[0])[0]"/>
+                    <t t-if="stock_info and stock_info.get('lot_name')">
+                        <br/><span t-esc="stock_info['lot_name']"/>
+                    </t>
+                    <t t-if="stock_info and stock_info.get('expiration_date')">
+                        <span t-esc="stock_info['expiration_date'].strftime('%d/%m/%Y')"/>
+                    </t>
+                </td>
+            </xpath>
+        </template>
+        <template id="report_replace_stock" inherit_id="stock_account.stock_account_report_invoice_document">
+            <xpath expr="//table[@name='invoice_snln_table']" position="replace"/>
+        </template>
+    </data>
+</odoo>

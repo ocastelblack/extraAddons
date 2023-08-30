@@ -1,0 +1,9 @@
+<odoo>
+    <template id="custom_report_sale_order_document" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@id='informations']" position="after">
+            <div>
+                <p>This is a custom div added after the 'informations' div.</p>
+            </div>
+        </xpath>
+    </template>
+</odoo>
