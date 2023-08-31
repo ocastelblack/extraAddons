@@ -1,9 +1,20 @@
 <odoo>
     <template id="custom_report_sale_order_document" inherit_id="sale.report_saleorder_document">
-        <xpath expr="//div[@id='informations']" position="after">
-            <div>
-                <p>This is a custom div added after the 'informations' div.</p>
-            </div>
+        <xpath expr="//td[@name='td_name']" position="replace">
+            <td id="product_name">
+                <span t-field="line.name"/>
+                <!-- <span t-esc="doc.funcion_lots_sales_order(doc.name,line.product_id)"/> -->
+                <t t-set="stock_info" t-value="doc.get_lots_sales_order(doc.name,str(line.product_id).split(',')[0])"/>
+                <t t-if="stock_info">
+                    <t t-set="first_lot" t-value="stock_info[0]" />
+                    <t t-if="first_lot.get('lot_name')">
+                        <br/><span t-esc="first_lot['lot_name']"/>  
+                    </t>
+                    <t t-if="first_lot.get('expiration_date')">
+                        <span t-esc="first_lot['expiration_date'].strftime('%d/%m/%Y')"/>
+                    </t>
+                </t>
+            </td>
         </xpath>
     </template>
 </odoo>

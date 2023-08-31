@@ -27,7 +27,7 @@ class query_lots_sales_order(models.Model):
         
         # return 'Hola'
         
-    def funcion_lots_sales_order(self,product_id):
+    def funcion_lots_sales_order(self,sale_order_name,product_id):
     
-        return product_id
+        return sale_order_name
     
