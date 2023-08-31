@@ -9,14 +9,13 @@
     'category': 'Inventory',
     'depends': ['base', 'product','stock','point_of_sale'],
     'data': [
-        'security/ir.model.access.csv',
         'views/product_Items_views.xml',
     ],
     'installable': True,
     'application': True,
-    'assets': {
-      "point_of_sale.assets":[
-          "custom_inventory/static/src/xml/extended_product_info_popup.xml"
-      ],  
-    },
+    # 'assets': {
+    #   "point_of_sale.assets":[
+    #       "custom_inventory/static/src/xml/extended_product_info_popup.xml"
+    #   ],  
+    # },
 }

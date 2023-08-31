@@ -10,7 +10,7 @@
                     <t t-if="stock_info">
                         <t t-set="first_lot" t-value="stock_info[0]" />
                         <t t-if="first_lot.get('lot_name')">
-                            <br/><span t-esc="first_lot['lot_name']"/>
+                            <br/><span t-esc="first_lot['lot_name']"/><t>  </t>
                         </t>
                         <t t-if="first_lot.get('expiration_date')">
                             <span t-esc="first_lot['expiration_date'].strftime('%d/%m/%Y')"/>

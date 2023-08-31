@@ -1,6 +1,5 @@
-<odoo>
+<!-- <odoo>
     <data>
-        <!-- Vista para mostrar el campo "items" en la vista de producto -->
         <record id="view_product_item" model="ir.ui.view">
             <field name="name">view_product_item</field>
             <field name="model">product.template</field>
@@ -10,6 +9,22 @@
                     <field name="stock_miami"/>
                     <field name="last_updated"/>
                 </xpath>
+            </field>
+        </record>
+    </data>
+</odoo> -->
+
+<odoo>
+    <data>
+        <record id="product_normal_form_view_inherit" model="ir.ui.view">
+            <field name="name">product.product_normal_form_view_inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <field name="default_code" position="after">
+                    <field name="stock_miami"/>
+                    <field name="last_updated"/>
+                </field>
             </field>
         </record>
     </data>
