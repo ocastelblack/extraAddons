@@ -7,5 +7,5 @@ class ProductProductInherit(models.Model):
         res = super(ProductProductInherit, self).get_product_info_pos(
             price, quantity, pos_config_id
         )
-        res.update({"stock_miami": self.product_tmpl_id.stock_miami})
+        res.update({"stock_miami": self.stock_miami})
         return res
