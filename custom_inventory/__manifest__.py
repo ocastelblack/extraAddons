@@ -13,9 +13,9 @@
     ],
     'installable': True,
     'application': True,
-    # 'assets': {
-    #   "point_of_sale.assets":[
-    #       "custom_inventory/static/src/xml/extended_product_info_popup.xml"
-    #   ],  
-    # },
+    'assets': {
+      "point_of_sale.assets":[
+          "custom_inventory/static/src/xml/extended_product_info_popup.xml"
+      ],  
+    },
 }
