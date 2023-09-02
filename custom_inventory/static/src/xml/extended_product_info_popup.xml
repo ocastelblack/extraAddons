@@ -30,6 +30,7 @@
             <tr class="custom-inventory-row">
                 <td>Stock Miami:</td>
                 <td><t t-esc="productInfo.stock_miami"/> Units</td>
+                <td> <t t-esc="productInfo.last_updated"></t></td>
             </tr>
         </xpath>
     </t>

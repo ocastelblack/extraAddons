@@ -26,7 +26,7 @@ class query_lots_sales_order(models.Model):
                     result = {
                         'product_name': line.product_id.name,
                         'lot_name': line.lot_id.name,
-                        'expiration_date': new_expiration_date
+                        'expiration_date': new_expiration_date.strftime("%d/%m/%Y")
                     }
                     results.append(result)
                     

@@ -7,5 +7,9 @@ class ProductProductInherit(models.Model):
         res = super(ProductProductInherit, self).get_product_info_pos(
             price, quantity, pos_config_id
         )
-        res.update({"stock_miami": self.stock_miami})
+        # res.update({"stock_miami": self.stock_miami})
+        res.update({
+            "stock_miami": self.stock_miami,
+            "last_updated": self.last_updated.strftime("%d/%m/%Y"),  # Agregar last_updated al diccionario
+        })
         return res
