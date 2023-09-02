@@ -26,13 +26,10 @@ class query_lots_sales_order(models.Model):
                     result = {
                         'product_name': line.product_id.name,
                         'lot_name': line.lot_id.name,
-                        'expiration_date': new_expiration_date.strftime("%d/%m/%Y")
+                        'expiration_date': new_expiration_date
                     }
                     results.append(result)
-                    
-        return results
         
-        # return 'Hola'
         
     def funcion_lots_sales_order(self,sale_order_name,product_id):
     

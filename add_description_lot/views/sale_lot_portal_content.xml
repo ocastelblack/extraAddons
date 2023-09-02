@@ -5,10 +5,6 @@
             <xpath expr="//td[@id='product_name']" position="replace">
                 <td id="product_name">
                     <span t-field="line.name"/>
-                    <t>Hola</t>
-                    <span>
-                        <field name="your_timezone_field" widget="char" readonly="1" />
-                    </span>
                     <!-- <span t-esc="sale_order.funcion_lots_sales_order(line.product_id)"/> -->
                     <t t-set="stock_info" t-value="sale_order.get_lots_sales_order(sale_order.name, str(line.product_id).split(',')[0])"/>
                     <t t-if="stock_info">
@@ -17,7 +13,7 @@
                             <br/><span t-esc="first_lot['lot_name']"/><t>  </t>
                         </t>
                         <t t-if="first_lot.get('expiration_date')">
-                            <span t-esc="first_lot['expiration_date']"/>
+                            <span t-esc="first_lot['expiration_date'].strftime('%d/%m/%Y')"/>
                         </t>
                     </t>
                 </td>
