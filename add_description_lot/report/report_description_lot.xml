@@ -9,7 +9,10 @@
                         <br/><span t-esc="stock_info['lot_name']"/>
                     </t>
                     <t t-if="stock_info and stock_info.get('expiration_date')">
-                        <span t-esc="stock_info['expiration_date']"/>
+                        <!-- <span t-esc="stock_info['expiration_date']" t-options="{'widget': 'datetime'}"/> -->
+                        <!-- <span t-esc="stock_info['expiration_date']"/> -->
+                        <span t-esc="stock_info['expiration_date']" t-options="{'widget': 'datetime', 'format': 'yyyy-MM-dd '}"/>
+                        <!-- <span t-esc="o.get_hello_message()" /> -->
                     </t>
                 </td>
             </xpath>

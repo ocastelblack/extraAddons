@@ -13,7 +13,7 @@
                             <br/><span t-esc="first_lot['lot_name']"/><t>  </t>
                         </t>
                         <t t-if="first_lot.get('expiration_date')">
-                            <span t-esc="first_lot['expiration_date'].strftime('%d/%m/%Y')"/>
+                            <span t-esc="first_lot['expiration_date']" t-options="{'widget': 'datetime', 'format': 'yyyy-MM-dd '}"/>
                         </t>
                     </t>
                 </td>

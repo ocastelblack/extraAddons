@@ -17,18 +17,14 @@ class query_lots_sales_order(models.Model):
 
         for line in stock_move_lines:
             if line.lot_id:
-                expiration_date = line.lot_id.expiration_date
-                
-                if expiration_date:
-                    # Restar 5 horas de la fecha de caducidad
-                    new_expiration_date = expiration_date - timedelta(hours=5)
-                    
-                    result = {
-                        'product_name': line.product_id.name,
-                        'lot_name': line.lot_id.name,
-                        'expiration_date': new_expiration_date
-                    }
-                    results.append(result)
+                result = {
+                    'product_name': line.product_id.name,
+                    'lot_name': line.lot_id.name,
+                    'expiration_date': line.lot_id.expiration_date
+                }
+                results.append(result)
+        
+        return results
         
         
     def funcion_lots_sales_order(self,sale_order_name,product_id):

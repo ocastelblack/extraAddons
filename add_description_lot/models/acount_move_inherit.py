@@ -1,4 +1,5 @@
 from odoo import models, fields
+from datetime import datetime
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
@@ -24,5 +25,12 @@ class AccountMove(models.Model):
                     'expiration_date': line.lot_id.expiration_date
                 }
                 results.append(result)
-        
+
         return results
+    
+    def format_date(self, date):
+        formatted_date = date.replace('-', '/')[:10]
+        return date
+    
+    def get_hello_message(self):
+        return "Hola"
