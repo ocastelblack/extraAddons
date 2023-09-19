@@ -1,0 +1,37 @@
+<odoo>
+    <template id="edit_web_payment" inherit_id="website_sale.address">
+        <xpath expr="//form[@class='checkout_autoformat']" position="before">
+            <div>
+                <!-- Contenido personalizado que deseas agregar antes del formulario -->
+                <p>Este es un contenido personalizado antes del formulario.</p>
+                <input t-att-value="partner_id or '0'" />
+                <span t-esc="website.pruba_hola_hse()"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="edit_web_payment2" inherit_id="website_sale.address">
+        <xpath expr="//form[@class='checkout_autoformat']/div[1]/div[1]" position="before">
+            <style>
+                .o_horizontal {
+                    display: inline-flex;
+                }
+                .form-check {
+                    padding-left: 25px;
+                }
+            </style>
+            <div name="company_type" class="o_field_widget o_field_radio mb-3 col-lg-12 ">
+                <div role="radiogroup" class="o_horizontal" aria-label="Tipo de compañía">
+                    <div class="form-check o_radio_item" aria-atomic="true">
+                        <input type="radio" class="form-check-input o_radio_input" name="radio_field_1" data-value="person" data-index="0" id="radio_field_1_person"/>
+                        <label class="form-check-label o_form_label" for="radio_field_1_person">Individual</label>
+                    </div>
+                    <div class="form-check o_radio_item" aria-atomic="true">
+                        <input type="radio" class="form-check-input o_radio_input" name="radio_field_1" data-value="company" data-index="1" id="radio_field_1_company"/>
+                        <label class="form-check-label o_form_label" for="radio_field_1_company">Compañía</label>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
