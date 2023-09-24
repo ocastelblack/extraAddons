@@ -4,9 +4,10 @@
     'category': 'Website',
     'summary': 'Personalización del Progress Wizard',
     'description': 'Agrega un div y un span después del progress-wizard.',
-    'depends': ['website','website_sale'],
+    'depends': ['base','website','website_sale'],
     'data': [
         'views/wizard_template.xml',  # Archivo XML con la vista personalizada
     ],
     'installable': True,
+     'application': True,
 }
