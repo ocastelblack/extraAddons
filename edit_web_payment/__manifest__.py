@@ -11,5 +11,8 @@
         'views/wizard_template.xml',  # Archivo XML con la vista personalizada
     ],
     'installable': True,
-     'application': True,
+    'application': True,
+    'qweb': [
+        'static/src/custom_validation.js',  # Ruta a tu archivo JavaScript personalizado.
+    ],
 }

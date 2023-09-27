@@ -61,9 +61,9 @@
                         <b>Número de Identificación (Obligatorio)</b>
                       </label>
                       <t t-set="vat_not_editable_message">No se permite cambiar el número de IVA una vez que se han emitido los documentos de su cuenta. Póngase en contacto con nosotros directamente para esta operación.</t>
-                      <input type="text" name="vat" t-attf-class="form-control #{error.get('vat') and 'is-invalid' or ''}" 
+                      <input type="text" name="vat" id="nit_check" t-attf-class="form-control #{error.get('vat') or ''}" 
                       t-att-value="'vat' in checkout and checkout['vat']" t-att-readonly="'1' if 'vat' in checkout and checkout['vat'] and not can_edit_vat else None" 
-                      t-att-title="vat_not_editable_message if 'vat' in checkout and checkout['vat'] and not can_edit_vat else None"/> 
+                      t-att-title="vat_not_editable_message if 'vat' in checkout and checkout['vat'] and not can_edit_vat else None"/>
                 </t>
             </div>
         </xpath>

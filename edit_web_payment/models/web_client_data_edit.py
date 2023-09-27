@@ -40,6 +40,9 @@ class WebsiteSalePruebas(models.Model):
 class CustomWebsiteSale(WebsiteSale):
     @http.route(['/shop/address'], type='http', methods=['GET', 'POST'], auth="public", website=True, sitemap=False)
     def address(self, **kw):
+        
+        result = super(CustomWebsiteSale, self).address(**kw)
+        
         is_company = False
         identification_type_id_str = kw.get('identification_type_id')
         if identification_type_id_str:
@@ -67,4 +70,5 @@ class CustomWebsiteSale(WebsiteSale):
                 partner = request.env['res.partner'].sudo().browse(partner_id)
                 partner.write({'is_company': is_company})
 
-        return super(CustomWebsiteSale, self).address(**kw)
+        # return super(CustomWebsiteSale, self).address(**kw)
+        return result
