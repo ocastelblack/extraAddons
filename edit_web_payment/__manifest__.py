@@ -12,7 +12,9 @@
     ],
     'installable': True,
     'application': True,
-    'qweb': [
-        'static/src/custom_validation.js',  # Ruta a tu archivo JavaScript personalizado.
-    ],
+    # 'assets': {
+    #     'web.assets_backend': [
+    #         'edit_web_payment/static/src/js/edit_name_user.js',  # Ruta al archivo JavaScript personalizado
+    #     ],
+    # },
 }
