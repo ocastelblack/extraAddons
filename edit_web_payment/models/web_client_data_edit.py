@@ -44,7 +44,7 @@ class WebsiteSalePruebas(models.Model):
 class CustomWebsiteSale(WebsiteSale):
     @http.route(['/shop/address'], type='http', methods=['GET', 'POST'], auth="public", website=True, sitemap=False)
     def address(self, **kw):
-        
+        kw['city'] = 'Bogotá D.C.'
         result = super(CustomWebsiteSale, self).address(**kw)
         
         is_company = False

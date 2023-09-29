@@ -44,7 +44,7 @@
             </div>
             <div id="tipo_identifacion" class="col-6 py-2  col-lg-6">
                 <t t-if="checkout">
-                    <t t-set="id_type_ch" t-value="website.extract_identification_type_number(checkout['l10n_latam_identification_type_id']) or 1" />
+                    <t t-set="id_type_ch" t-value="'l10n_latam_identification_type_id' in checkout and website.extract_identification_type_number(checkout['l10n_latam_identification_type_id'])" />
                 </t>
                 <t t-else="">
                     <t t-set="id_type_ch" t-value="1" />
@@ -115,13 +115,9 @@
         <xpath expr="//label[@for='state_id']" position="replace">
             <label class="col-form-label" for="state_id">Departamento</label>
         </xpath>
-        <xpath expr="//label[@for='city']" position="replace">
+        <!-- <xpath expr="//label[@for='city']" position="replace">
         </xpath>
         <xpath expr="//input[@name='city']" position="replace">
-        </xpath>
-        <!-- <xpath expr="//div[@id='padre-ciudad']" position="replace">
         </xpath> -->
-        <xpath expr="//form[@class='checkout_autoformat']/div[1]/div[14]" position="replace">
-        </xpath>
     </template>
 </odoo>

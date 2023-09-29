@@ -12,9 +12,9 @@
     ],
     'installable': True,
     'application': True,
-    'assets': {
-        'web.assets_frontend': [
-            'edit_web_payment/static/src/js/edit_name_user.js',  # Ruta al archivo JavaScript personalizado
-        ],
-    },
+    # 'assets': {
+    #     'web.assets_frontend': [
+    #         'edit_web_payment/static/src/js/edit_name_user.js',  # Ruta al archivo JavaScript personalizado
+    #     ],
+    # },
  }
