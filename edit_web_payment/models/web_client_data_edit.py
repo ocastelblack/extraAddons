@@ -31,7 +31,7 @@ class WebsiteSalePruebas(models.Model):
         else:
             extracted_number = 1  # Set the default value to 1 if checkout is not provided or is empty
 
-        return extracted_number
+        return int(extracted_number)
     
     def get_identification_types(self):
         identification_types = self.env['l10n_latam.identification.type'].search([])

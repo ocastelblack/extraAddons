@@ -13,25 +13,30 @@
         <xpath expr="//form[@class='checkout_autoformat']/div[1]/div[1]" position="before">
             <style>
                 .o_horizontal {
-                    display: inline-flex;
+                display: inline-flex;
                 }
                 .form-check1 {
-                    padding-left: 25px;
+                padding-left: 25px;
                 }
             </style>
             <div id="edit_website_sale_res_partner" class="mb-3 col-lg-12 ">
-                <div  role="radiogroup" name="company_type" class="o_horizontal" aria-label="Tipo de compañía">
-                    <div class="form-check1" >
-                        <!-- <input type="radio" class="form-check1 " name="radio_field" value="individual" data-index="0"  id="radio_field_1_person"
+                <div role="radiogroup" name="company_type" class="o_horizontal"
+                    aria-label="Tipo de compañía">
+                    <div class="form-check1">
+                        <!-- <input type="radio" class="form-check1 " name="radio_field"
+                        value="individual" data-index="0"  id="radio_field_1_person"
                             t-attf-checked="{{'true' if checkout and not checkout['is_company'] else 'false'}}"  /> -->
-                        <input type="radio" class="form-check1" name="radio_field" value="individual" data-index="0" id="radio_field_1_person"
+                        <input type="radio" class="form-check1" name="radio_field"
+                            value="individual" data-index="0" id="radio_field_1_person"
                             t-attf-checked="exist(checkout) and not checkout['is_company'] or false" />
                         <label class="form-check-label" for="radio_field_1_person">Persona</label>
                     </div>
-                    <div class="form-check1" >
-                        <!-- <input type="radio" class="form-check1" name="radio_field" value="company" data-index="1"  id="radio_field_1_company"
+                    <div class="form-check1">
+                        <!-- <input type="radio" class="form-check1" name="radio_field"
+                        value="company" data-index="1"  id="radio_field_1_company"
                             t-attf-checked="{{'true' if checkout and checkout['is_company'] else 'false'}}"  /> -->
-                        <input type="radio" class="form-check1" name="radio_field" value="company" data-index="1" id="radio_field_1_company"
+                        <input type="radio" class="form-check1" name="radio_field" value="company"
+                            data-index="1" id="radio_field_1_company"
                             t-attf-checked="exist(checkout) and checkout['is_company'] or false" />
                         <label class="form-check-label" for="radio_field_1_company">Empresa</label>
                     </div>
@@ -39,18 +44,25 @@
             </div>
             <div id="tipo_identifacion" class="col-6 py-2  col-lg-6">
                 <t t-if="checkout">
-                    <t t-set="id_type_ch" t-value="checkout['l10n_latam_identification_type_id'] if 'l10n_latam_identification_type_id' in checkout else ''" />
+                    <t t-set="id_type_ch" t-value="website.extract_identification_type_number(checkout['l10n_latam_identification_type_id']) or 1" />
                 </t>
                 <t t-else="">
                     <t t-set="id_type_ch" t-value="1" />
                 </t>
+                <!-- <t t-set="id_type_ch1"
+                        t-value="website.extract_identification_type_number(checkout['l10n_latam_identification_type_id'])" /> -->
+                <!-- <t t-set="id_type_ch1"
+                        t-value="'l10n_latam_identification_type_id' in checkout and website.extract_identification_type_number(checkout['l10n_latam_identification_type_id'])" /> -->
                 <div t-attf-class="form-group col-lg-6 div_type_identitication">
-                    <label class="col-form-label" for="l10n_latam_identification_type">Tipo de Identificación</label>
-                    <select id="identification_type_id" name="identification_type_id" t-attf-class="form-select">
+                    <label class="col-form-label" for="l10n_latam_identification_type">Tipo de
+                        Identificación</label>
+                    <select id="identification_type_id" name="identification_type_id"
+                        t-attf-class="form-select">
                         <t t-foreach="website.get_identification_types()" t-as="identification_type">
                             <t t-set="id_type" t-value="identification_type.id" />
                             <t t-set="id_type_name" t-value="identification_type.name" />
-                            <option t-att-value="id_type"  t-att-selected="id_type == id_type_ch">
+                            <t t-debug="id_type_ch"/>
+                            <option t-att-value="id_type" t-att-selected="id_type==id_type_ch">
                                 <t t-esc="id_type_name" />
                             </option>
                         </t>
@@ -58,51 +70,58 @@
                 </div>
             </div>
             <div id="numero_identificacion" class="col-6 py-2  col-lg-6">
-                <t t-if="mode == ('new', 'billing') or (mode == ('edit', 'billing') and (can_edit_vat or 'vat' in checkout and checkout['vat']))">
+                <t
+                    t-if="mode == ('new', 'billing') or (mode == ('edit', 'billing') and (can_edit_vat or 'vat' in checkout and checkout['vat']))">
                     <label class="col-form-label fw-normal label-optional form-label" for="vat">
                         <b>Número de Identificación (Obligatorio)</b>
-                      </label>
-                      <t t-set="vat_not_editable_message">No se permite cambiar el número de IVA una vez que se han emitido los documentos de su cuenta. Póngase en contacto con nosotros directamente para esta operación.</t>
-                      <input type="text" name="vat" id="nit_check" t-attf-class="form-control #{error.get('vat') or ''}"
-                      t-att-value="'vat' in checkout and checkout['vat']" t-att-readonly="'1' if 'vat' in checkout and checkout['vat'] and not can_edit_vat else None"
-                      t-att-title="vat_not_editable_message if 'vat' in checkout and checkout['vat'] and not can_edit_vat else None"/>
+                    </label>
+                    <t t-set="vat_not_editable_message">No se permite cambiar el número de IVA una
+                        vez que se han emitido los documentos de su cuenta. Póngase en contacto con
+                        nosotros directamente para esta operación.</t>
+                    <input type="text" name="vat" id="nit_check"
+                        t-attf-class="form-control #{error.get('vat') or ''}"
+                        t-att-value="'vat' in checkout and checkout['vat']"
+                        t-att-readonly="'1' if 'vat' in checkout and checkout['vat'] and not can_edit_vat else None"
+                        t-att-title="vat_not_editable_message if 'vat' in checkout and checkout['vat'] and not can_edit_vat else None" />
                 </t>
             </div>
         </xpath>
 
         <xpath expr="//form[@class='checkout_autoformat']/div[1]/div[13]" position="before">
             <t t-if="checkout">
-                <t t-set="id_type_id" t-value="website.extract_identification_type_number(checkout['city_id']) if 'city_id' in checkout else ''" />
+                <t t-set="id_city_ch" t-value="'city_id' in checkout and website.extract_identification_type_number(checkout['city_id'])" />
             </t>
             <t t-else="">
-                <t t-set="id_type_id" t-value="1" />
+                <t t-set="id_city_ch" t-value="1" />
             </t>
-            <input t-att-value="id_type_id" />
+            <!-- <input t-att-value="id_city_ch" /> -->
             <div id="tipo_ciudad" class="col-6 py-2  col-lg-6">
                 <label class="col-form-label" for="city_type">Ciudad </label>
-                    <select name="city_type" t-attf-class="form-select">
-                        <t t-foreach="website.get_city_types()" t-as="city_type">
-                            <t t-set="id_city" t-value="city_type.id" />
-                            <t t-set="city_name" t-value="city_type.name" />
-                            <option t-att-value="id_city"  t-att-selected="id_city == id_type_id">
-                                <t t-esc="city_name" />
-                            </option>
-                            <!-- <option t-att-value="id_city">
+                <select name="city_type" t-attf-class="form-select">
+                    <t t-foreach="website.get_city_types()" t-as="city_type">
+                        <t t-set="id_city" t-value="city_type.id" />
+                        <t t-set="city_name" t-value="city_type.name" />
+                        <option t-att-value="id_city" t-att-selected="id_city == id_city_ch">
+                            <t t-esc="city_name" />
+                        </option>
+                        <!-- <option t-att-value="id_city">
                                 <t t-esc="city_name" />
                             </option> -->
-                        </t>
-                    </select>
+                    </t>
+                </select>
             </div>
         </xpath>
 
-        <!-- <xpath expr="//label[@for='state_id']" position="replace">
+        <xpath expr="//label[@for='state_id']" position="replace">
             <label class="col-form-label" for="state_id">Departamento</label>
         </xpath>
         <xpath expr="//label[@for='city']" position="replace">
         </xpath>
         <xpath expr="//input[@name='city']" position="replace">
         </xpath>
-        <xpath expr="//form[@class='checkout_autoformat']/div[1]/div[14]" position="replace">
+        <!-- <xpath expr="//div[@id='padre-ciudad']" position="replace">
         </xpath> -->
+        <xpath expr="//form[@class='checkout_autoformat']/div[1]/div[14]" position="replace">
+        </xpath>
     </template>
 </odoo>
