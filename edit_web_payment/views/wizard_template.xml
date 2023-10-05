@@ -23,38 +23,32 @@
                 <div role="radiogroup" name="company_type" class="o_horizontal"
                     aria-label="Tipo de compañía">
                     <div class="form-check1">
-                        <!-- <input type="radio" class="form-check1 " name="radio_field"
-                        value="individual" data-index="0"  id="radio_field_1_person"
-                            t-attf-checked="{{'true' if checkout and not checkout['is_company'] else 'false'}}"  /> -->
                         <input type="radio" class="form-check1" name="radio_field"
-                            value="individual" data-index="0" id="radio_field_1_person"
-                            t-attf-checked="exist(checkout) and not checkout['is_company'] or false" />
+                            value="individual" data-index="1" id="radio_field_1_person"
+                            t-attf-checked="exist(checkout) and checkout['is_company'] == '' ? 'checked' : ''" />
                         <label class="form-check-label" for="radio_field_1_person">Persona</label>
                     </div>
                     <div class="form-check1">
-                        <!-- <input type="radio" class="form-check1" name="radio_field"
-                        value="company" data-index="1"  id="radio_field_1_company"
-                            t-attf-checked="{{'true' if checkout and checkout['is_company'] else 'false'}}"  /> -->
                         <input type="radio" class="form-check1" name="radio_field" value="company"
-                            data-index="1" id="radio_field_1_company"
-                            t-attf-checked="exist(checkout) and checkout['is_company'] or false" />
+                            data-index="0" id="radio_field_1_company"
+                            t-attf-checked="exist(checkout) and checkout['is_company'] == 'true' ? 'checked' : ''" />
                         <label class="form-check-label" for="radio_field_1_company">Empresa</label>
                     </div>
                 </div>
             </div>
-            <div id="tipo_identifacion" class="col-6 py-2  col-lg-6">
+            <div id="div_tipo_identifacion" class="col-6 py-2  col-lg-6">
                 <t t-if="checkout">
                     <t t-set="id_type_ch" t-value="'l10n_latam_identification_type_id' in checkout and website.extract_identification_type_number(checkout['l10n_latam_identification_type_id'])" />
                 </t>
                 <t t-else="">
-                    <t t-set="id_type_ch" t-value="1" />
+                    <t t-set="id_type_ch" t-value="5" />
                 </t>
                 <!-- <t t-set="id_type_ch1"
                         t-value="website.extract_identification_type_number(checkout['l10n_latam_identification_type_id'])" /> -->
                 <!-- <t t-set="id_type_ch1"
                         t-value="'l10n_latam_identification_type_id' in checkout and website.extract_identification_type_number(checkout['l10n_latam_identification_type_id'])" /> -->
                 <div t-attf-class="form-group col-lg-6 div_type_identitication">
-                    <label class="col-form-label" for="l10n_latam_identification_type">Tipo de
+                    <label id="label_tipo_identifacion" class="col-form-label" for="l10n_latam_identification_type">Tipo de
                         Identificación</label>
                     <select id="identification_type_id" name="identification_type_id"
                         t-attf-class="form-select">
@@ -69,10 +63,10 @@
                     </select>
                 </div>
             </div>
-            <div id="numero_identificacion" class="col-6 py-2  col-lg-6">
+            <div id="div_numero_identificacion" class="col-6 py-2  col-lg-6">
                 <t
                     t-if="mode == ('new', 'billing') or (mode == ('edit', 'billing') and (can_edit_vat or 'vat' in checkout and checkout['vat']))">
-                    <label class="col-form-label fw-normal label-optional form-label" for="vat">
+                    <label id="label_numero_identificacion" class="col-form-label fw-normal label-optional form-label" for="vat">
                         <b>Número de Identificación (Obligatorio)</b>
                     </label>
                     <t t-set="vat_not_editable_message">No se permite cambiar el número de IVA una
@@ -92,12 +86,12 @@
                 <t t-set="id_city_ch" t-value="'city_id' in checkout and website.extract_identification_type_number(checkout['city_id'])" />
             </t>
             <t t-else="">
-                <t t-set="id_city_ch" t-value="1" />
+                <t t-set="id_city_ch" t-value="150" />
             </t>
             <!-- <input t-att-value="id_city_ch" /> -->
-            <div id="tipo_ciudad" class="col-6 py-2  col-lg-6">
-                <label class="col-form-label" for="city_type">Ciudad </label>
-                <select name="city_type" t-attf-class="form-select">
+            <div id="div_tipo_ciudad" class="col-6 py-2  col-lg-6">
+                <label id="label_tipo_ciudad" class="col-form-label" for="city_type">Ciudad </label>
+                <select id="tipo_ciudad" name="city_type" t-attf-class="form-select">
                     <t t-foreach="website.get_city_types()" t-as="city_type">
                         <t t-set="id_city" t-value="city_type.id" />
                         <t t-set="city_name" t-value="city_type.name" />
