@@ -73,6 +73,7 @@ class CustomWebsiteSale(WebsiteSale):
             if partner_id:
                 partner = request.env['res.partner'].sudo().browse(partner_id)
                 partner.write({'is_company': is_company})
+                kw['is_company'] = is_company
                 
         if city_id:
             if partner_id:
@@ -92,6 +93,8 @@ class CustomWebsiteSale(WebsiteSale):
             checkout['l10n_latam_identification_type_id'] = all_values['identification_type_id']
         if 'city_type' in all_values:
             checkout['city_id'] = all_values['city_type']
+        if 'is_company' in all_values:
+            checkout['is_company'] = all_values['is_company']
         result = super(CustomWebsiteSale, self)._checkout_form_save(mode, checkout, all_values)
         return result
         
