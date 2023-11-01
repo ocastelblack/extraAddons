@@ -1,0 +1,75 @@
+<odoo>
+    <record id="view_purchase_order_line" model="ir.ui.view">
+        <field name="name">purchase.order.line.view</field>
+        <field name="model">purchase.order.line</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <button name="purchase_transfer" icon="fa-pencil-square-o" type="object" class="oe_stat_button" help="Open Purchase Order."/>
+                <field name="po_name" string="RFQ/PO Number" optional="show"/>
+                <field name="partner_id" string="Vendor (Supplier)" optional="show"/>
+                <field name="partner_ref" string="Vendor Reference" optional="show"/>
+                <!-- <field name="x_studio_job_number" string="Job Number" optional="hide"/> -->
+                <field name="state" string="Status" optional="hide"/>
+                <field name="date_approve" string="Confirmation Date" optional="show"/>
+                <field name="line_effective_date" string="Receipt Date" optional="show"/>
+                <field name="date_planned" string="Due Date" optional="show"/>
+                <field name="days_late" string="Days Late" optional="show"/> 
+                <field name="default_code" string="Part#" optional="hide"/>
+                <field name="name" string="Description" optional="show" />
+                <field name="product_qty" string="Qty Ordered" optional="hide"/>
+                <field name="qty_received" string="Qty Received" optional="hide"/>
+                <field name="reamining_qty" string="Qty Remaining" optional="hide"/>
+                <field name="qty_invoiced" string="Qty Billed" optional="hide"/>
+                <field name="price_unit" string="Unit Price" optional="hide"/>
+                <field name="price_subtotal" string="Ext Price" optional="hide"/>
+                <field name="purchase_rep" string="Purchase Rep" optional="hide"/>
+                <field name="buyers_id" string="Buyer" optional="hide"/>
+                <field name="commodity" string="Commodity" optional="hide"/>
+                <field name="product_family_id" string="Product Family" optional="hide"/>
+                <field name="dest_address_id" string="Receipt Location" optional="hide"/>
+                <field name="invoice_status" string="Billing Status" optional="hide"/>
+                <field name="dollar_subtotal" string="Dollar Value Ordered" optional="hide"/>
+                <field name="recieved_amount" string="Dollar Value Received" optional="hide"/>
+                <field name="invoiced_amount" string="Dollar Value Invoiced" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_purchase_order_line_search" model="ir.ui.view">
+        <field name="name">purchase.order.line.view.search</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                    <filter string="Fully Received" name="filter_fully_delivered" domain="[('fully_received','=',True),
+                                                                                          ('product_qty','!=',0.00),
+                                                                                          ('qty_received','!=',0.00)]"/>
+                    <filter string="To Be Received" name="filter_to_be_delivered" domain="[('to_be_received','=',True),
+                                                                                          ('product_qty','!=',0.00),
+                                                                                          ('qty_received','!=',0.00)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="ec_action_purchase_order_line_view" model="ir.actions.act_window">
+            <field name="name">Purchase items</field>
+            <field name="res_model">purchase.order.line</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_purchase_order_line"/>
+            <field name="search_view_id" ref="purchase.purchase_order_line_search"/>
+            <field name="domain">[('order_id.state', '=', 'purchase')]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a Purchase Items
+              </p>
+            </field>
+        </record>
+    
+    <menuitem id="menu_purchase_order_line"
+        name="Purchase Items"
+        action="ec_action_purchase_order_line_view"
+        parent="purchase.menu_procurement_management"
+        groups="purchase.group_purchase_manager"
+        sequence="2"/>
+</odoo>
